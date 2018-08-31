@@ -11,9 +11,6 @@ window.onload = function(){
       this.rock = new Rock();
       this.slingshot = new Slingshot();
       this.birds = [];
-      this.food = [];
-      this.rocks = [];
-      
     }
 
     checkWormBirdCollision(){
@@ -22,43 +19,42 @@ window.onload = function(){
         if((this.worm.x + this.worm.width >= eachBird.x && this.worm.x <= eachBird.x+eachBird.width) &&
         (this.worm.y + this.worm.height >= eachBird.y && this.worm.y <= eachBird.y+eachBird.height)){
         this.gameOver = true;
-          console.log("ahh collision")
-          console.log(this.gameOver)
-          console.log(theGame.checkGameOver())
         }
      })
     }
 
     checkBirdRockCollision(){
-      this.emptyRock = true;
       this.birds.forEach((eachBird, index)=>{
          if((this.rock.x + this.rock.width >= eachBird.x && this.rock.x <= eachBird.x+eachBird.width) &&
          (this.rock.y + this.rock.height >= eachBird.y && this.rock.y <= eachBird.y+eachBird.height)){
          this.birds.splice(index, 1);
-         this.emptyRock = false;
          }
       })
      }
 
     checkWormRockCollision(){
       this.gameOver = false;
-      this.emptyRock = true;
          if((this.worm.x + this.worm.width >= this.rock.x && this.worm.x <= this.rock.x+this.rock.width) &&
          (this.worm.y + this.worm.height >= this.rock.y && this.worm.y <= this.rock.y+this.rock.height)){
          this.gameOver = true;
-         this.emptyRock = false;
          }
       }
 
     checkGameOver(){
      if(this.gameOver === true){
+      stop();
+      ctx.clearRect(0,0,800,600);
+       ctx.font="40px Myriad Pro";
+       ctx.fillText("GAME OVER!!!!!",250,300);
+      }
+    }
+
+    checkGameWin(){
+      if(this.birds.length === 0){
         stop();
         ctx.clearRect(0,0,800,600);
-        // var theImage = new Image();
-        // theImage.src = "images/GAMEOVER.png";
-        // ctx.drawImage(theImage, 200, 300, 200, 200)
-       ctx.font="40px Fantasy";
-       ctx.fillText("GAME OVER!!!!!",200,300);
+        ctx.font="40px Myriad Pro";
+        ctx.fillText("YOU WIN!!!!!",250,300);
       }
     }
 
@@ -79,14 +75,15 @@ window.onload = function(){
     createBirds(){
       for(let i = 0; i < 5; i++){
         const theX = Math.floor(Math.random()*750);
-        const theY = Math.floor(Math.random()*550);
+        //const theY = Math.floor(Math.random()*550);
+        const theY = Math.random() * (490) + 60
         this.birds.unshift(new Bird(theX, theY));
       }
     }
 
     throwRock(){
       this.rock.move(mouseX, mouseY); 
-    }  //either food or rock. tells you what it collided with so that you can grow, get hurt etc
+    }
 
   };
 
@@ -124,12 +121,12 @@ window.onload = function(){
     requestId = undefined;
     ctx.clearRect(0,0,800,600);
     start();
-    theGame.drawEverything();
+    theGame.drawEverything(); 
+    theGame.checkWormBirdCollision();
+    theGame.checkWormRockCollision();
     theGame.checkWormBirdCollision();
     theGame.checkGameOver();
-    theGame.checkWormRockCollision();
-    theGame.checkGameOver();
-    theGame.checkBirdRockCollision();
+    theGame.checkGameWin();
     
     
   };

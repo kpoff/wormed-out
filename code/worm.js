@@ -6,7 +6,6 @@ class Worm{
     this.height = 40;
     this.delta = 1;
     this.imageSource = "images/worm.png";
-    this.underground = false;
   }
 
   draw(){
@@ -37,7 +36,7 @@ class Worm{
         this.moveLeft();
       }
       
-    },100)
+    },40)
   }
 
 

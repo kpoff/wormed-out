@@ -39,15 +39,15 @@ class Rock{
       }
       if(this.x < newX){
         this.moveRight();
+
       }
       if(this.x === newX && this.y === newY){
+        theGame.checkBirdRockCollision();
         clearInterval(intid);
-        if(theGame.emptyRock === true){
             this.x = 355;
             this.y = 596;
-        }
       }       
-    },10)
+    },1)
   }
 
 }

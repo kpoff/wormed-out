@@ -1,5 +1,6 @@
-.body{
-  background-color: lightblue;
+body{
+  background-image: url('../images/sky.png');
+
 }
 
 
@@ -28,24 +29,26 @@
 
 #game-container{
   display: flex;
-  margin-left: 80px;
+ 
 }
 
 #title{
+  padding-right: 60px;
+  padding-left: 30px;
   content: url('../images/title.png')
 }
 
 #game-board {
  
   background-image: url('../images/background.png');
-  background-size: 100% 100%;
+
  
   
 }
 
 #canvas {
   text-align: center;
-  border: 1px solid black;
+  
    
 }
 
