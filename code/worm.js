@@ -1,7 +1,7 @@
 class Worm{
   constructor(){
-    this.x = 500;
-    this.y = 500;
+    this.x = 0;
+    this.y = 0;
     this.width = 80;
     this.height = 40;
     this.delta = 1;
@@ -10,13 +10,9 @@ class Worm{
   }
 
   draw(){
-
     var theImage = new Image();
     theImage.src = this.imageSource;
     ctx.drawImage(theImage, this.x, this.y, this.width, this.height)
-
-    
-    
   }
 
   moveRight(){

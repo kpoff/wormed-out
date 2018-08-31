@@ -2,12 +2,15 @@ class Rock{
   constructor(){
     this.x = 355;
     this.y = 596;
-    this.width = 20;
-    this.height = 20;
+    this.width = 40;
+    this.height = 40;
+    this.imageSource = "images/rock.png";
     }
 
   draw(){
-    ctx.fillRect(this.x, this.y, this.width, this.height)
+    var theImage = new Image();
+    theImage.src = this.imageSource;
+    ctx.drawImage(theImage, this.x, this.y, this.width, this.height)
   }
 
   clear(){
@@ -27,25 +30,27 @@ class Rock{
   }
 
   move(newX, newY){
-
-    setInterval(()=>{
-        if(this.y > newY){
+    intid =  setInterval(()=>{
+      if(this.y > newY){
         this.moveUp();
+      }
+      if(this.x > newX){
+        this.moveLeft();
+      }
+      if(this.x < newX){
+        this.moveRight();
+      }
+      if(this.x === newX && this.y === newY){
+        clearInterval(intid);
+        if(theGame.emptyRock === true){
+            this.x = 355;
+            this.y = 596;
         }
-        if(this.x > newX){
-          this.moveLeft();
-        }
-        if(this.x < newX){
-          this.moveRight();
-        }
-          console.log("hello")  
+      }       
     },10)
-    console.log("goodbye")
-    
-    
   }
 
-  
-
 }
+
+var intid;
 

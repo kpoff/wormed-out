@@ -4,14 +4,16 @@ let canvas;
 
 window.onload = function(){
 
+
   class Game{
     constructor(){
       this.worm = new Worm();
       this.rock = new Rock();
+      this.slingshot = new Slingshot();
       this.birds = [];
-      this.shots = [];
       this.food = [];
       this.rocks = [];
+      
     }
 
     checkWormBirdCollision(){
@@ -20,6 +22,9 @@ window.onload = function(){
         if((this.worm.x + this.worm.width >= eachBird.x && this.worm.x <= eachBird.x+eachBird.width) &&
         (this.worm.y + this.worm.height >= eachBird.y && this.worm.y <= eachBird.y+eachBird.height)){
         this.gameOver = true;
+          console.log("ahh collision")
+          console.log(this.gameOver)
+          console.log(theGame.checkGameOver())
         }
      })
     }
@@ -40,30 +45,31 @@ window.onload = function(){
       this.emptyRock = true;
          if((this.worm.x + this.worm.width >= this.rock.x && this.worm.x <= this.rock.x+this.rock.width) &&
          (this.worm.y + this.worm.height >= this.rock.y && this.worm.y <= this.rock.y+this.rock.height)){
-         console.log("you killed your worm")
          this.gameOver = true;
          this.emptyRock = false;
          }
       }
 
-    // checkGameOver(){
-    //  if(this.gameOver === true){
-    //     stop();
-    //     ctx.clearRect(0,0,800,600);
-    //     var theImage = new Image();
-    //     theImage.src = "";
-    //     ctx.drawImage(theImage, 200, 300, 200, 200)
-    //   // ctx.font="40px Fantasy";
-    //   // ctx.fillText("GAME OVER!!!!!",200,300);
-    //   }
-    // }
+    checkGameOver(){
+     if(this.gameOver === true){
+        stop();
+        ctx.clearRect(0,0,800,600);
+        // var theImage = new Image();
+        // theImage.src = "images/GAMEOVER.png";
+        // ctx.drawImage(theImage, 200, 300, 200, 200)
+       ctx.font="40px Fantasy";
+       ctx.fillText("GAME OVER!!!!!",200,300);
+      }
+    }
 
     drawEverything(){
       this.worm.draw();
       this.birds.forEach((bird) => {
       bird.draw()
       });
+      this.slingshot.draw();
       this.rock.draw();
+      
     }
 
     moveWorm(){
@@ -76,9 +82,6 @@ window.onload = function(){
         const theY = Math.floor(Math.random()*550);
         this.birds.unshift(new Bird(theX, theY));
       }
-    }
-
-    updatePoints(){
     }
 
     throwRock(){
@@ -99,7 +102,6 @@ window.onload = function(){
 
   function startGame(){
     theGame = new Game();
-  //  theGame.this.rock.draw();
     theGame.moveWorm();
     theGame.createBirds();
     document.getElementById('canvas').onmousedown = mouseDown;
@@ -113,18 +115,8 @@ window.onload = function(){
     mouseY = evt.clientY - rect.top;
     theGame.throwRock();
     
-
-    // setTimeout(()=>{
-    //   if(this.emptyRock === true){
-    //     this.rock.x = 355;
-    //     this.rock.y = 596;
-    //   }
-    // },50)
+  }
     
-    }
-    
-  
-
   var requestId;
 
 
@@ -134,11 +126,12 @@ window.onload = function(){
     start();
     theGame.drawEverything();
     theGame.checkWormBirdCollision();
+    theGame.checkGameOver();
     theGame.checkWormRockCollision();
+    theGame.checkGameOver();
     theGame.checkBirdRockCollision();
-   
     
- //   theGame.checkGameOver();
+    
   };
 
 

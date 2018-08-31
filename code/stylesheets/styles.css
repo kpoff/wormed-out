@@ -1,3 +1,8 @@
+.body{
+  background-color: lightblue;
+}
+
+
 #button{
   display: flex;
   text-align: right;
@@ -6,7 +11,7 @@
 
 .header{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   
 }
 
@@ -16,19 +21,31 @@
   box-shadow: 0;
   background: linear-gradient(to bottom, #9DA400, #BAC600);
   color: #fff;
-  padding: 20px 40px;
+  padding: 10px 30px;
   font-size: 30px;
   border-radius: 5px;
 }
 
+#game-container{
+  display: flex;
+  margin-left: 80px;
+}
+
 #title{
-  margin: 0;
-  font-size: 40px;
-  font-family: fantasy;
+  content: url('../images/title.png')
+}
+
+#game-board {
+ 
+  background-image: url('../images/background.png');
+  background-size: 100% 100%;
+ 
+  
 }
 
 #canvas {
   text-align: center;
   border: 1px solid black;
+   
 }
 
